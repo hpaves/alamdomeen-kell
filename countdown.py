@@ -1,15 +1,22 @@
 #!/usr/bin/env python
-"""This script compares a list of school bell tiimes with the
-current time of the day and tells you the difference in HH:MM:SS"""
+"""This script compares a list of school bell times with the current time
+of the day and shows you the countdown to the next bell in HH:MM:SS"""
 
 import time
 import datetime
 
 def main():
     """This it the main function of the script that executes other functions."""
-    timecompare()
+#    comparetime()
+    readfile()
 
-def timecompare():
+def readfile():
+    """Reads a timetable from a file and makes it a list."""
+    with open("timetable1") as filecontents:
+        timetable_list = filecontents.read().splitlines()
+        print timetable_list
+
+def comparetime():
     """"Compares the school bell time to the current time."""
     while True:
         raw_lesson_time = "8:30:00.000000"
@@ -24,6 +31,10 @@ def timecompare():
         delta = lesson_time - current_time
         print(str(delta).split(".")[0])
         time.sleep(1)
+
+def checkday():
+    """If monday, picks timetable1, if any other weekday, picks timetable2,
+    if weekend, displays a message that tells people to go home."""
 
 if __name__ == "__main__":
     main()
