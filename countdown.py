@@ -8,7 +8,12 @@ import datetime
 def main():
     """This it the main function of the script that executes other functions."""
     while True:
-        countdown()
+        weekday = datetime.datetime.today().weekday()
+        if weekday == 5 or weekday == 6:
+            print "It's weekend, go home!"
+            time.sleep(1)
+        else:
+            countdown()
 
 def pick_the_correct_file():
     """If monday, picks timetable1, if any other weekday, picks timetable2."""
