@@ -10,7 +10,7 @@ def main():
     while True:
         weekday = datetime.datetime.today().weekday()
         if weekday == 5 or weekday == 6:
-            print "It's weekend, go home!"
+            print("It's weekend, go home!")
             time.sleep(1)
         else:
             countdown()
