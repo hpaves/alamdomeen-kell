@@ -6,7 +6,7 @@ import time
 import datetime
 
 def main():
-    """Clearly, this it the main method of the script"""
+    """Clearly, this it the main method of the script."""
     while True:
         raw_lesson_time = "8:30:00.000000"
         raw_current_time = datetime.datetime.now().time() # get current time, strip the date
@@ -18,7 +18,7 @@ def main():
         else:
             pass
         delta = lesson_time - current_time
-        print str(delta).split(".")[0]
+        print(str(delta).split(".")[0])
         time.sleep(1)
 
 if __name__ == "__main__":
