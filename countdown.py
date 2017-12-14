@@ -1,19 +1,23 @@
 #!/usr/bin/env python
-"""This script compares a preset time of the day with the current time of the day
-and tells you the difference in minutes and hours."""
+"""This script compares a list of school bell tiimes with the
+current time of the day and tells you the difference in HH:MM:SS"""
 
 import time
 import datetime
 
 def main():
-    """Clearly, this it the main method of the script."""
+    """This it the main function of the script that executes other functions."""
+    timecompare()
+
+def timecompare():
+    """"Compares the school bell time to the current time."""
     while True:
         raw_lesson_time = "8:30:00.000000"
         raw_current_time = datetime.datetime.now().time() # get current time, strip the date
         time_formatter_formula = "%H:%M:%S.%f" # idea from here: http://bit.ly/2C3F0Rj
         lesson_time = datetime.datetime.strptime(raw_lesson_time, time_formatter_formula)
         current_time = datetime.datetime.strptime(str(raw_current_time), time_formatter_formula)
-        if lesson_time < current_time: # add one day if the lessons are over for today
+        if lesson_time < current_time: # +1 day to avoid negative if the lessons are over for today
             lesson_time = lesson_time + datetime.timedelta(days=1)
         else:
             pass
