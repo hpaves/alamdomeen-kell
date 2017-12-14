@@ -7,7 +7,8 @@ import datetime
 
 def main():
     """This it the main function of the script that executes other functions."""
-    countdown()
+    while True:
+        countdown()
 
 def pick_the_correct_file():
     """If monday, picks timetable1, if any other weekday, picks timetable2."""
@@ -41,19 +42,18 @@ def find_next_lesson():
 
 def countdown():
     """"Compares the school bell time to the current time."""
-    while True:
-        lesson_time_string = find_next_lesson() + str(".000000")
-        current_time_string = datetime.datetime.now().time() # get current time, strip the date
-        time_formatter_formula = "%H:%M:%S.%f" # idea from here: http://bit.ly/2C3F0Rj
-        lesson_time = datetime.datetime.strptime(lesson_time_string, time_formatter_formula)
-        current_time = datetime.datetime.strptime(str(current_time_string), time_formatter_formula)
-        if lesson_time < current_time: # +1 day to avoid negative if the lessons are over for today
-            lesson_time = lesson_time + datetime.timedelta(days=1)
-        else:
-            pass
-        delta = lesson_time - current_time
-        print(str(delta).split(".")[0])
-        time.sleep(1)
+    lesson_time_string = find_next_lesson() + str(".000000")
+    current_time_string = datetime.datetime.now().time() # get current time, strip the date
+    time_formatter_formula = "%H:%M:%S.%f" # idea from here: http://bit.ly/2C3F0Rj
+    lesson_time = datetime.datetime.strptime(lesson_time_string, time_formatter_formula)
+    current_time = datetime.datetime.strptime(str(current_time_string), time_formatter_formula)
+    if lesson_time < current_time: # +1 day to avoid negative if the lessons are over for today
+        lesson_time = lesson_time + datetime.timedelta(days=1)
+    else:
+        pass
+    delta = lesson_time - current_time
+    print(str(delta).split(".")[0])
+    time.sleep(1)
 
 if __name__ == "__main__":
     main()
