@@ -32,7 +32,7 @@ def main():
 def final_countdown_value():
     """This function figures out the final output message."""
     weekday = datetime.datetime.today().weekday()
-    if weekday == 5 or weekday == 6:
+    if weekday == 1 or weekday == 2:
         return "It's weekend, go home!"
     return countdown()
 
@@ -59,7 +59,7 @@ def find_next_lesson():
         lesson_time = datetime.datetime.strptime(lesson_time_string, time_formatter_formula)
         current_time = datetime.datetime.strptime(str(current_time_string), time_formatter_formula)
         if lesson_time > current_time:
-            return str(lesson_time).split(" ")[1]
+            return specific_time
         else:
             counter = counter + 1
             if counter == len(timetable_today):
