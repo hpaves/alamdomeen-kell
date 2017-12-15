@@ -21,15 +21,13 @@ def final_countdown_value():
     weekday = datetime.datetime.today().weekday()
     if weekday == 5 or weekday == 6:
         return "It's weekend, go home!"
-    else:
-        return countdown()
+    return countdown()
 
 def pick_the_correct_file():
     """If monday, picks timetable1, if any other weekday, picks timetable2."""
     if datetime.datetime.today().weekday() == 0:
         return "timetable1"
-    else:
-        return "timetable2"
+    return "timetable2"
 
 def read_file():
     """Reads a timetable from a file and makes it a list."""
