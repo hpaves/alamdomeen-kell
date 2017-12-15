@@ -33,9 +33,9 @@ def find_next_lesson():
     timetable_today = read_file()
     counter = 0
     for specific_time in timetable_today:
-        lesson_time_string = specific_time + str(".000000")
-        current_time_string = datetime.datetime.now().time() # get current time, strip the date
-        time_formatter_formula = "%H:%M:%S.%f" # idea from here: http://bit.ly/2C3F0Rj
+        lesson_time_string = specific_time + str(":00")
+        current_time_string = str(datetime.datetime.now().time()).split(".")[0]
+        time_formatter_formula = "%H:%M:%S" # idea from here: http://bit.ly/2C3F0Rj
         lesson_time = datetime.datetime.strptime(lesson_time_string, time_formatter_formula)
         current_time = datetime.datetime.strptime(str(current_time_string), time_formatter_formula)
         if lesson_time > current_time:
@@ -47,9 +47,9 @@ def find_next_lesson():
 
 def countdown():
     """"Compares the school bell time to the current time."""
-    lesson_time_string = find_next_lesson() + str(".000000")
-    current_time_string = datetime.datetime.now().time() # get current time, strip the date
-    time_formatter_formula = "%H:%M:%S.%f" # idea from here: http://bit.ly/2C3F0Rj
+    lesson_time_string = find_next_lesson() + str(":00")
+    current_time_string = str(datetime.datetime.now().time()).split(".")[0]
+    time_formatter_formula = "%H:%M:%S" # idea from here: http://bit.ly/2C3F0Rj
     lesson_time = datetime.datetime.strptime(lesson_time_string, time_formatter_formula)
     current_time = datetime.datetime.strptime(str(current_time_string), time_formatter_formula)
     if lesson_time < current_time: # +1 day to avoid negative if the lessons are over for today
