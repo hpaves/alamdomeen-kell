@@ -2,13 +2,14 @@
 """This script compares a list of school bell times with the current time
 of the day and shows you the countdown to the next bell in HH:MM:SS"""
 
-import time
+from __future__ import print_function
+#import time
 import datetime
 from flask import Flask
 
 app = Flask(__name__)
 
-@app.route("/", methods = ["GET"])
+@app.route("/", methods=["GET"])
 def main():
     """This it the main function of the script that executes other functions."""
     while True:
