@@ -3,7 +3,7 @@
 of the day and shows you the countdown to the next bell in HH:MM:SS"""
 
 from __future__ import print_function
-#import time
+import time
 import datetime
 from flask import Flask
 
@@ -14,7 +14,20 @@ def main():
     """This it the main function of the script that executes other functions."""
     while True:
         output = final_countdown_value()
-        return output
+        print(output)
+        return """
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="refresh" content="1">
+                    <title>countdown.py</title>
+                </head>
+                <body>
+                    <h1>%s</h1>
+                </body>
+            </html>
+            """ % output
 
 def final_countdown_value():
     """This function figures out the final output message."""
