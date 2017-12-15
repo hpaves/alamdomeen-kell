@@ -4,7 +4,11 @@ of the day and shows you the countdown to the next bell in HH:MM:SS"""
 
 import time
 import datetime
+from flask import Flask
 
+app = Flask(__name__)
+
+@app.route("/")
 def main():
     """This it the main function of the script that executes other functions."""
     while True:
@@ -13,7 +17,7 @@ def main():
             print("It's weekend, go home!")
             time.sleep(1)
         else:
-            countdown()
+            return countdown()
 
 def pick_the_correct_file():
     """If monday, picks timetable1, if any other weekday, picks timetable2."""
@@ -57,8 +61,11 @@ def countdown():
     else:
         pass
     delta = lesson_time - current_time
-    print(str(delta).split(".")[0])
-    time.sleep(1)
+#    time.sleep(1)
+    return str(delta)
+#     print(str(delta).split(".")[0])
+#     time.sleep(1)
 
 if __name__ == "__main__":
-    main()
+#    main()
+    app.run(debug=True)
