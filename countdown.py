@@ -8,15 +8,20 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods = ["GET"])
 def main():
     """This it the main function of the script that executes other functions."""
     while True:
-        weekday = datetime.datetime.today().weekday()
-        if weekday == 5 or weekday == 6:
-            return "It's weekend, go home!"
-        else:
-            return countdown()
+        output = final_countdown_value()
+        return output
+
+def final_countdown_value():
+    """This function figures out the final output message."""
+    weekday = datetime.datetime.today().weekday()
+    if weekday == 5 or weekday == 6:
+        return "It's weekend, go home!"
+    else:
+        return countdown()
 
 def pick_the_correct_file():
     """If monday, picks timetable1, if any other weekday, picks timetable2."""
