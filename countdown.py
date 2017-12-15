@@ -14,8 +14,7 @@ def main():
     while True:
         weekday = datetime.datetime.today().weekday()
         if weekday == 5 or weekday == 6:
-            print("It's weekend, go home!")
-            time.sleep(1)
+            return "It's weekend, go home!"
         else:
             return countdown()
 
@@ -61,11 +60,7 @@ def countdown():
     else:
         pass
     delta = lesson_time - current_time
-#    time.sleep(1)
     return str(delta)
-#     print(str(delta).split(".")[0])
-#     time.sleep(1)
 
 if __name__ == "__main__":
-#    main()
     app.run(debug=True)
