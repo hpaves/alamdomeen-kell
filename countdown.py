@@ -29,6 +29,21 @@ def index():
                         $.ajaxSetup({ cache: false });
                         });
                     </script>
+                    <style type="text/css">
+                        html, body {
+                        width: 100%;
+                        margin: 0;
+                        padding: 0;
+                        }
+                        #container {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        font-size: 30vmin;
+                        text-align: center;
+                        }
+                    </style>
                 </head>
                 <body>
                     <h1><div id="container"></div></h1>
@@ -47,8 +62,8 @@ def final_countdown_value():
     """This function figures out the final output message."""
     weekday = datetime.datetime.today().weekday()
     if weekday == 1 or weekday == 2:
-        return "It's weekend, go home!"
-    return countdown()
+        return "Go home"
+    return "Bell in " + str(countdown())
 
 def pick_the_correct_file():
     """If monday, picks timetable1, if any other weekday, picks timetable2."""
