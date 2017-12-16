@@ -9,25 +9,39 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
-def main():
-    """This it the main function of the script that executes other functions."""
-    while True:
-        output = final_countdown_value()
-        print(output)
-        return """
+@app.route("/")
+def index():
+    """Dislpays the main function output in HTML."""
+    # https://www.brightcherry.co.uk/scribbles/jquery-auto-refresh-div-every-x-seconds/
+    return """
             <!DOCTYPE html>
             <html>
                 <head>
                     <meta charset="UTF-8">
-                    <meta http-equiv="refresh" content="1">
                     <title>countdown.py</title>
+                    <script src="http://code.jquery.com/jquery-latest.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $("#container").load("main.php");
+                        var refreshId = setInterval(function() {
+                            $("#container").load("main.php");
+                        }, 1000);
+                        $.ajaxSetup({ cache: false });
+                        });
+                    </script>
                 </head>
                 <body>
-                    <h1>%s</h1>
+                    <h1><div id="container"></div></h1>
                 </body>
             </html>
-            """ % output
+            """
+
+@app.route("/main.php")
+def main():
+    """This it the main function of the script that executes other functions."""
+    while True:
+        output = final_countdown_value()
+        return output
 
 def final_countdown_value():
     """This function figures out the final output message."""
