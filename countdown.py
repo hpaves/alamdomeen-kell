@@ -91,6 +91,7 @@ def countdown():
     else:
         pass
     delta = lesson_time - current_time
+    time.sleep(1)
     return str(delta)
 
 if __name__ == "__main__":
