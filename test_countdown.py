@@ -1,9 +1,9 @@
-"""Simple unittest for Countdownpy"""
+"""Unittests for Countdownpy"""
 import unittest
 import countdown
 
 class TestCountdown(unittest.TestCase):
-    """The class for testing"""
+    """The class is mainly intended to test functions with time-based arguments"""
 
     def test_second_input_larger(self):
         """Compares the times to give True or False"""
