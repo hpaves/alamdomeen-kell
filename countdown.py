@@ -63,7 +63,7 @@ def final_countdown_value():
     weekday = datetime.datetime.today().weekday()
     if weekday == 5 or weekday == 6 or friday_night():
         return "Go home"
-    return "Bell in " + str(countdown())
+    return "Bell in " + str(countdown(current_time_w_seconds(), find_next_lesson()))
 
 def pick_the_correct_file():
     """If monday, picks timetable1, if any other weekday, picks timetable2."""
@@ -77,21 +77,25 @@ def read_file():
         timetable_list = file_contents.read().splitlines()
         return timetable_list
 
-def input_larger_than_current(input_time):
-    """Takes HH:MM input and determines if it's larger than the current time."""
-    lesson_time_string = input_time + str(":00")
-    current_time_string = str(datetime.datetime.now().time()).split(".")[0]
+def current_time_w_seconds():
+    """Finds the current system time in HH:MM:SS"""
+    ct_output = str(datetime.datetime.now().time()).split(".")[0]
+    return ct_output
+
+def second_input_larger(current_time_string, other_string):
+    """Takes two inputs -- HH:MM:SS, HH:MM -- and tells whether the second is larger."""
+    other_string = other_string + str(":00")
     time_formatter_formula = "%H:%M:%S" # idea from here: http://bit.ly/2C3F0Rj
-    lesson_time = datetime.datetime.strptime(lesson_time_string, time_formatter_formula)
+    other_time = datetime.datetime.strptime(other_string, time_formatter_formula)
     current_time = datetime.datetime.strptime(str(current_time_string), time_formatter_formula)
-    if lesson_time < current_time:
+    if other_time < current_time:
         return False
     return True
 
 def friday_night():
     """Determines if it's Friday night and the lessons are over for today."""
     its_friday = datetime.datetime.today().weekday() == 4
-    lessons_are_over = input_larger_than_current(find_next_lesson()) is False
+    lessons_are_over = second_input_larger(current_time_w_seconds(), find_next_lesson()) is False
     if its_friday and lessons_are_over:
         return True
 
@@ -100,20 +104,19 @@ def find_next_lesson():
     timetable_today = read_file()
     counter = 0
     for specific_time in timetable_today:
-        if input_larger_than_current(specific_time):
+        if second_input_larger(current_time_w_seconds(), specific_time):
             return specific_time
         else:
             counter = counter + 1
             if counter == len(timetable_today):
                 return timetable_today[0]
 
-def countdown():
+def countdown(current_time_argument, next_lesson_argument):
     """"Compares the school bell time to the current time."""
-    lesson_time_string = find_next_lesson() + str(":00")
-    current_time_string = str(datetime.datetime.now().time()).split(".")[0]
+    next_lesson_argument_w_seconds = next_lesson_argument + str(":00")
     time_formatter_formula = "%H:%M:%S" # idea from here: http://bit.ly/2C3F0Rj
-    lesson_time = datetime.datetime.strptime(lesson_time_string, time_formatter_formula)
-    current_time = datetime.datetime.strptime(str(current_time_string), time_formatter_formula)
+    lesson_time = datetime.datetime.strptime(next_lesson_argument_w_seconds, time_formatter_formula)
+    current_time = datetime.datetime.strptime(str(current_time_argument), time_formatter_formula)
     if lesson_time < current_time: # +1 day to avoid negative if the lessons are over for today
         lesson_time = lesson_time + datetime.timedelta(days=1)
     else:
