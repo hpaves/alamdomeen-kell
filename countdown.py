@@ -7,9 +7,9 @@ import time
 import datetime
 from flask import Flask
 
-app = Flask(__name__)
+COUNTDOWN_APP = Flask(__name__)
 
-@app.route("/")
+@COUNTDOWN_APP.route("/")
 def index():
     """Dislpays the main function output in HTML."""
     # https://www.brightcherry.co.uk/scribbles/jquery-auto-refresh-div-every-x-seconds/
@@ -51,7 +51,7 @@ def index():
             </html>
             """
 
-@app.route("/main.php")
+@COUNTDOWN_APP.route("/main.php")
 def main():
     """This it the main function of the script that executes other functions."""
     while True:
@@ -123,4 +123,4 @@ def countdown():
     return str(delta)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    COUNTDOWN_APP.run()
