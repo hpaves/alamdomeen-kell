@@ -61,7 +61,7 @@ def main():
 def final_countdown_value():
     """This function figures out the final output message."""
     weekday = datetime.datetime.today().weekday()
-    if weekday == 1 or weekday == 2:
+    if weekday == 5 or weekday == 6 or friday_night():
         return "Go home"
     return "Bell in " + str(countdown())
 
@@ -77,17 +77,30 @@ def read_file():
         timetable_list = file_contents.read().splitlines()
         return timetable_list
 
+def input_larger_than_current(input_time):
+    """Takes HH:MM input and determines if it's larger than the current time."""
+    lesson_time_string = input_time + str(":00")
+    current_time_string = str(datetime.datetime.now().time()).split(".")[0]
+    time_formatter_formula = "%H:%M:%S" # idea from here: http://bit.ly/2C3F0Rj
+    lesson_time = datetime.datetime.strptime(lesson_time_string, time_formatter_formula)
+    current_time = datetime.datetime.strptime(str(current_time_string), time_formatter_formula)
+    if lesson_time < current_time:
+        return False
+    return True
+
+def friday_night():
+    """Determines if it's Friday night and the lessons are over for today."""
+    its_friday = datetime.datetime.today().weekday() == 4
+    lessons_are_over = input_larger_than_current(find_next_lesson()) is False
+    if its_friday and lessons_are_over:
+        return True
+
 def find_next_lesson():
     """Iterates over the timetable to find out the start of the next lesson."""
     timetable_today = read_file()
     counter = 0
     for specific_time in timetable_today:
-        lesson_time_string = specific_time + str(":00")
-        current_time_string = str(datetime.datetime.now().time()).split(".")[0]
-        time_formatter_formula = "%H:%M:%S" # idea from here: http://bit.ly/2C3F0Rj
-        lesson_time = datetime.datetime.strptime(lesson_time_string, time_formatter_formula)
-        current_time = datetime.datetime.strptime(str(current_time_string), time_formatter_formula)
-        if lesson_time > current_time:
+        if input_larger_than_current(specific_time):
             return specific_time
         else:
             counter = counter + 1
