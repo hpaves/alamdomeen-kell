@@ -48,7 +48,7 @@ To jury rig the functionality:
 ## Where to go next
 
 ### Better deployment guidelines
-- The current deployment guide is basically a hack, running the app in systemwide dev environment on linux only
+- The current deployment guide is basically a hack, running the app in a dev environment on linux only
 - We'd need tutorials on how to deploy this both on LAN (both linux and windows) and on a website
 
 ### Add support for days starting on different times
