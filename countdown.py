@@ -61,7 +61,7 @@ def main():
 def final_countdown_value():
     """This function figures out the final output message."""
     weekday = datetime.datetime.today().weekday()
-    if weekday == 5 or weekday == 6 or friday_night():
+    if weekday == 5 or weekday == 6 or lessons_are_over():
         return "Go home"
     return "Bell in " + str(countdown(current_time_w_seconds(), find_next_lesson()))
 
@@ -92,11 +92,10 @@ def second_input_larger(current_time_string, other_string):
         return False
     return True
 
-def friday_night():
-    """Determines if it's Friday night and the lessons are over for today."""
-    its_friday = datetime.datetime.today().weekday() == 4
+def lessons_are_over():
+    """Determines if the lessons are over for today."""
     lessons_are_over = second_input_larger(current_time_w_seconds(), find_next_lesson()) is False
-    if its_friday and lessons_are_over:
+    if lessons_are_over:
         return True
 
 def find_next_lesson():
@@ -112,7 +111,7 @@ def find_next_lesson():
                 return timetable_today[0]
 
 def countdown(current_time_argument, next_lesson_argument):
-    """"Compares the school bell time to the current time."""
+    """Compares the school bell time to the current time."""
     next_lesson_argument_w_seconds = next_lesson_argument + str(":00")
     time_formatter_formula = "%H:%M:%S" # idea from here: http://bit.ly/2C3F0Rj
     lesson_time = datetime.datetime.strptime(next_lesson_argument_w_seconds, time_formatter_formula)
