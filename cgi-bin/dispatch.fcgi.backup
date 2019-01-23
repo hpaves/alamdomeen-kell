@@ -1,0 +1,36 @@
+#!/usr/bin/env python3.5
+
+import os, sys
+
+DOMAIN = "melliste.ee" # Teie domeeni nimi (ilma www.-ta)
+PREFIX = "/www/apache/domains/www.%s" % (DOMAIN,)
+
+# Add a custom Python path.
+sys.path.insert(0, os.path.join(PREFIX, ".virtualenvs/flask-website/lib/python3.5/site-packages/"))
+
+from flup.server.fcgi import WSGIServer
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World! <a href=\"test/\">to test</a>"
+
+@app.route("/test/")
+def test():
+    return "Test!"
+
+class ScriptNameStripper(object):
+   def __init__(self, app):
+       self.app = app
+
+   def __call__(self, environ, start_response):
+       environ['SCRIPT_NAME'] = ''
+       return self.app(environ, start_response)
+
+app = ScriptNameStripper(app)
+
+if __name__ == '__main__':
+    WSGIServer(app).run()
+
