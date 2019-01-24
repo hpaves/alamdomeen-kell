@@ -69,7 +69,7 @@ def final_countdown_value():
     """This function figures out the final output message."""
     weekday = datetime.datetime.today().weekday()
     if weekday == 5 or weekday == 6 or lessons_are_over():
-        return "Go home"
+        return "Mine koju"
     return "Kellani " + str(countdown(current_time_w_seconds(), find_next_lesson()))
 
 def pick_the_correct_file():
