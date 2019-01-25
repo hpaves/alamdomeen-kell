@@ -1,6 +1,6 @@
 # alamdomeen-kell
 
-See on koolikella rakendus, mis loeb tekstifailist HH:MM kujul sõned ning näitab html lehel suure kirjaga HH:MM:SS kujul, kui kaua on jäänud järgmise koolikellani. Nädalavahetusel, või kui tunnid on lõppenud, ilmub lehele tekst "Mine koju". Rakendusest on kasu näiteks õpetajate toa seinal.
+See on koolikella rakendus, mis loeb tekstifailidest koolikellade ajad ja näitab html lehel suurelt, kui kaua on jäänud järgmise koolikellani. Nädalavahetusel, või kui tunnid on lõppenud, ilmub lehele tekst "Mine koju". Rakendusest on kasu näiteks õpetajate toa seinal.
 
 ![koolikell näeb brauseris välja selline](koolikell_brauseris.jpg)
 
